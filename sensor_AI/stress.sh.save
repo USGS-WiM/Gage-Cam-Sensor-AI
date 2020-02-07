@@ -1,6 +1,0 @@
-how CPU freq & Temp cat  /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq vcgencmd measure_temp#show CPU freq & Temp
-cat  /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
-vcgencmd measure_temp
-
-
-
