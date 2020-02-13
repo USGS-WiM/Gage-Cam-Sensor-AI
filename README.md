@@ -14,6 +14,22 @@ The Sensor AI is a component developed for the remote sensor deployment of a pre
 
 Prerequisits are still under development and will appear here and in a make file once a final platform is established. At present, Sensor AI runs on Raspberry Pi 4, Raspberry Pi 3B, and AWS t2.micro w/ Ubuntu 16. Testing continues on Raspberry Pi 3 A+, Raspberry Pi Zero, Sparkfun Artemis Redboard, and Sparkfun Artemis Nano.
 
+#### Raspberry Pi 3 A+ 
+The sensor build requires the following components:
+
+With sudo apt install:
+- python >= 3.6
+- libatlas-base-dev
+With sud apt-get install python3-: 
+- pip3 >= 20.0
+- numpy
+- scipy
+- opencv
+With pip3 install:
+- wrapt (must be upgraded with the following code: pip3 install wrapt --upgrade --ignore-installed)
+- h5py
+- tensorflow
+- keras
 
 
 ## Getting Started
@@ -24,9 +40,21 @@ This project is under development. Check the project engineering notebook to see
 
 To be announced after the current development phase is completed.
 
+1. As supper user, alter the swap space in the file  /etc/dphys-swapfile from 100 to 4096
+
+2. Restart swap with command  sudo /etc/init.d/dphys-swapfile restart
+
+3. Run bash build.sh
+
+4. Set swap back to 100 in /etc/dphys-swapfile
+
+5. Restart swap with command  sudo /etc/init.d/dphys-swapfile restart
+
+6. Reboot with command sudo reboot now
+
 ## Building and testing
 
-Comming soon.
+Run command python3 run_lite.py
 
 ## Deployment
 
