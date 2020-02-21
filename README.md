@@ -7,61 +7,114 @@
 
 The Sensor AI is a component developed for the remote sensor deployment of a pre-trained Keras deep learning model. This model was trained using the HPC Sensor AI component. 
 
-
-
-
 ### Prerequisites
 
-Prerequisits are still under development and will appear here and in a make file once a final platform is established. At present, Sensor AI runs on Raspberry Pi 4, Raspberry Pi 3B, and AWS t2.micro w/ Ubuntu 16. Testing continues on Raspberry Pi 3 A+, Raspberry Pi Zero, Sparkfun Artemis Redboard, and Sparkfun Artemis Nano.
+Pre-requisits are still under development and will appear here and in a make file once a final platform is established. At present, Sensor AI runs on Raspberry Pi 4, Raspberry Pi 3B, and AWS t2.micro w/ Ubuntu 16. Testing continues on Raspberry Pi 3 A+, Raspberry Pi Zero, Sparkfun Artemis Redboard, and Sparkfun Artemis Nano.
 
-#### Raspberry Pi 3 A+ 
-The sensor build requires the following components:
+### Hardware
+  - Raspberry Pi 3 A+
+  - Raspberry Pi NoIR Camera v2.1
+  - Witty Pi 3
+  - Verizon USB Cellular Modem
+  - microSD card  
+  - Voltaic 12,800maH battery
 
-With sudo apt install:
-- python >= 3.6
-- libatlas-base-dev
-With sud apt-get install python3-: 
-- pip3 >= 20.0
-- numpy
-- scipy
-- opencv
-With pip3 install:
-- wrapt (must be upgraded with the following code: pip3 install wrapt --upgrade --ignore-installed)
-- h5py
-- tensorflow
-- keras
+### Install raspbian
 
+Follow steps from raspbian installation guide [here](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 
-## Getting Started
+- Flash image to microSD card using Balena Etcher
+- Insert microSD card into pi and plug in
 
-This project is under development. Check the project engineering notebook to see project history and current efforts.
+#### Set static IP on raspberry pi
+Edit the dhcpcd conf: `sudo nano /etc/dhcpcd.conf`
 
-### Installing
+Add or uncomment the following:
+
+```bash
+interface eth0
+static ip_address=166.252.48.111/24
+static routers=166.252.48.112
+static domain_name_servers=166.252.48.112
+```
+
+### Configure raspbian
+
+Once the pi has booted, log in using: user `pi` password `raspberry`
+
+Run `sudo raspi-config` to run raspberry pi config wizard:
+
+- change user password
+- enable SSH
+- enable camera
+- change locale (en_US.UTF-8)
+- change keyboard layout (generic 105 key US)
+
+### Disable unneeded features for battery consumption
+
+**Could do more research here**
+
+Edit `sudo nano /boot/config.txt` then add the following:
+
+```bash
+#disable bluetooth
+dtoverlay=pi3-disable-bt
+
+#disable wifi
+dtoverlay=pi3-disable-wifi
+
+#disable onboard LED
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+```
+
+### Install Software
+Get install script and run using 'source':
+
+```bash
+wget https://raw.githubusercontent.com/USGS-WiM/Gage-Cam-Sensor-AI/dev/build.sh
+source build.sh
+```
+
+### Set capture script to run on startup (this will then trigger AI model run)
+
+Edit file  `sudo nano /etc/rc.local` and add the following after `fi` and before `exit 0:`
+
+```bash
+/usr/bin/python3 /home/pi/Gage-Cam-Sensor-AI/camera/capture.py
 
 ```
-#### https://stackoverflow.com/questions/59505609/hadoopfilesystem-load-error-during-tensorflow-installation-on-raspberry-pi3
 
-mkdir tf_pi
-cd tf_pi
+### WittyPi setup info
 
-sudo apt-get install -y python3-pip git
-sudo python3 -m pip install virtualenv
-virtualenv env
-source env/bin/activate
+#### WittyPi Mini
+Install wittyPi software: 
 
-sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
-python3 -m pip install keras_applications==1.0.8 --no-deps
-python3 -m pip install keras_preprocessing==1.1.0 --no-deps
-python3 -m pip install h5py==2.9.0
-sudo apt-get install -y openmpi-bin libopenmpi-dev
-sudo apt-get install -y libatlas-base-dev
-python3 -m pip install -U six wheel mock
-
-wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.0.0/tensorflow-2.0.0-cp37-none-linux_armv7l.whl
-python3 -m pip install tensorflow-2.0.0-cp37-none-linux_armv7l.whl
-
-git clone https://github.com/USGS-WiM/Gage-Cam-Sensor-AI
+```bash
+wget http://www.uugear.com/repo/WittyPi2/installWittyPi.sh
+sudo sh installWittyPi.sh
 ```
+
+#### WittyPi3
+Install wittyPi software: 
+
+```bash
+wget http://www.uugear.com/repo/WittyPi3/install.sh
+Run setup script: `sudo sh install.sh
+```
+
+#### WItty Pi create script to run every hour
+create new schedule script to turn on 5 mins every hour.  In `/home/pi/wittyPi/schedules`:
+
+```bash
+cp on_5m_every_20m.wpi on_5m_every_60m.wpi
+nano on_5m_every_60m.wpi
+```
+
+- change `OFF  M515` to `OFF M55`
+- save and exit
+- Open wittyPi setup script: `sudo sh ./wittyPi.sh` and select your new schedule script
+
 
 ## Building and testing
 

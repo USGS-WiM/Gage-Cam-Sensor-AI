@@ -1,0 +1,7 @@
+node_modules
+raspi-resources
+.vscode
+*.csv
+*.zip
+*.db
+secrets.py
