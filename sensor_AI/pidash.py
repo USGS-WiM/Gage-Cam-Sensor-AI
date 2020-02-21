@@ -1,5 +1,5 @@
 import subprocess
-
+import time
 
 def temp_freq():
 	freq = subprocess.run(['cat', '/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq'], stdout=subprocess.PIPE)
