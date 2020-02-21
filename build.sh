@@ -4,8 +4,8 @@
 ##
 ## Martyn Smith 2/21/2020
 
-#install initial prerequisite apt packages
-sudo apt-get install -y python3-pip git python3-astral python3-picamera python3-smbus
+#install initial prerequisite system-wide apt packages
+sudo apt-get install -y python3-pip git
 
 #install virtualenv
 sudo python3 -m pip install virtualenv
@@ -17,6 +17,11 @@ cd Gage-Cam-Sensor-AI
 #start virtual env
 virtualenv env
 source env/bin/activate
+
+#install image capture packages
+python3 -m pip install astral 
+python3 -m pip install picamera 
+python3 -m pip install smbus
 
 #install tensorflow related packages in order
 sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev

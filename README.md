@@ -81,11 +81,12 @@ source build.sh
 Edit file  `sudo nano /etc/rc.local` and add the following after `fi` and before `exit 0:`
 
 ```bash
-/usr/bin/python3 /home/pi/Gage-Cam-Sensor-AI/camera/capture.py
+/home/pi/Gage-Cam-Sensor-AI/env/bin/python /home/pi/Gage-Cam-Sensor-AI/sensor_AI/capture.py
 
 ```
 
 ### WittyPi setup info
+Install software as described here **BEFORE** attaching WittyPi
 
 #### WittyPi Mini
 Install wittyPi software: 
@@ -115,8 +116,11 @@ nano on_5m_every_60m.wpi
 - save and exit
 - Open wittyPi setup script: `sudo sh ./wittyPi.sh` and select your new schedule script
 
+#### Install WittyPi module onto Raspberry Pi
+Shut down pi, install Witty Pi, and boot
+Watch console and check log files to insure successfull installation
 
-## Building and testing
+## Test tensorflow model
 
 Run command python3 run_lite.py
 
