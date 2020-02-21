@@ -1,22 +1,14 @@
 #!/bin/bash
-dirname = "ft_pi"
 
-if [ ! -d "$dirname" ]
-then
-    echo "Folder doesn't exist. Creating now"
-    mkdir ./$dirname
-    echo "Folder created"
-else
-    echo "Folder exists"
-fi
+sudo apt-get install -y python3-pip git
+sudo python3 -m pip install virtualenv
 
-# cd $dirname
+git clone https://github.com/USGS-WiM/Gage-Cam-Sensor-AI
 
-# sudo apt-get install -y python3-pip git
-# sudo python3 -m pip install virtualenv
+cd Gage-Cam-Sensor-AI
 
-# virtualenv env
-# source env/bin/activate
+virtualenv env
+source env/bin/activate
 
 # sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
 # python3 -m pip install keras_applications==1.0.8 --no-deps
