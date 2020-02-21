@@ -1,14 +1,32 @@
-#The following scipt will build all neccisary libraries on the sensor device
+#!/bin/bash
+dirname = "ft_pi"
 
-sudo apt -y update
-sudo apt -y full-upgrade
-sudo apt-get install -y python3 --update
-sudo apt-get install -y python3-pip
-sudo apt-get install -y python3-numpy
-sudo apt-get install -y python3-scipy
-sudo apt install -y libatlas-base-dev
-sudo pip3 install wrapt --upgrade --ignore-installed
-sudo pip3 install h5py
-sudo pip3 install tensorflow
-sudo pip3 install keras
-sudo apt install -y python3-opencv
+if [ ! -d "$dirname" ]
+then
+    echo "Folder doesn't exist. Creating now"
+    mkdir ./$dirname
+    echo "Folder created"
+else
+    echo "Folder exists"
+fi
+
+# cd $dirname
+
+# sudo apt-get install -y python3-pip git
+# sudo python3 -m pip install virtualenv
+
+# virtualenv env
+# source env/bin/activate
+
+# sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
+# python3 -m pip install keras_applications==1.0.8 --no-deps
+# python3 -m pip install keras_preprocessing==1.1.0 --no-deps
+# python3 -m pip install h5py==2.9.0
+# sudo apt-get install -y openmpi-bin libopenmpi-dev
+# sudo apt-get install -y libatlas-base-dev
+# python3 -m pip install -U six wheel mock
+
+# wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.0.0/tensorflow-2.0.0-cp37-none-linux_armv7l.whl
+# python3 -m pip install tensorflow-2.0.0-cp37-none-linux_armv7l.whl
+
+# git clone https://github.com/USGS-WiM/Gage-Cam-Sensor-AI
