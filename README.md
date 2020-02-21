@@ -38,19 +38,30 @@ This project is under development. Check the project engineering notebook to see
 
 ### Installing
 
-To be announced after the current development phase is completed.
+```
+#### https://stackoverflow.com/questions/59505609/hadoopfilesystem-load-error-during-tensorflow-installation-on-raspberry-pi3
 
-1. As supper user, alter the swap space in the file  /etc/dphys-swapfile from 100 to 4096
+mkdir tf_pi
+cd tf_pi
 
-2. Restart swap with command  sudo /etc/init.d/dphys-swapfile restart
+sudo apt-get install -y python3-pip git
+sudo python3 -m pip install virtualenv
+virtualenv env
+source env/bin/activate
 
-3. Run bash build.sh
+sudo apt-get install -y libhdf5-dev libc-ares-dev libeigen3-dev
+python3 -m pip install keras_applications==1.0.8 --no-deps
+python3 -m pip install keras_preprocessing==1.1.0 --no-deps
+python3 -m pip install h5py==2.9.0
+sudo apt-get install -y openmpi-bin libopenmpi-dev
+sudo apt-get install -y libatlas-base-dev
+python3 -m pip install -U six wheel mock
 
-4. Set swap back to 100 in /etc/dphys-swapfile
+wget https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.0.0/tensorflow-2.0.0-cp37-none-linux_armv7l.whl
+python3 -m pip install tensorflow-2.0.0-cp37-none-linux_armv7l.whl
 
-5. Restart swap with command  sudo /etc/init.d/dphys-swapfile restart
-
-6. Reboot with command sudo reboot now
+git clone https://github.com/USGS-WiM/Gage-Cam-Sensor-AI
+```
 
 ## Building and testing
 
