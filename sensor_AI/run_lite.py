@@ -1,9 +1,10 @@
 from tensorflow import keras
 import numpy as np
 import pidash
+import os
 #import gc
 
-
+PATH = os.path.dirname(__file__)
 
 # This is a prototype implementation of the sensor AI deployment. 
 #This is not final code and should not be reguarded as a best practices.
@@ -37,7 +38,7 @@ def get_exposed(y_hat):
 def execute(): #on_dek, meta, id):
 	#gc.collect()
 	#Load keras pretrained model from .h5 file
-	model = keras.models.load_model("model/UnetM-relu_output.h5") 
+	model = keras.models.load_model(PATH + "/model/UnetM-relu_output.h5") 
 	# summarize model 
 	model.summary()
 	pidash.dashboard()
@@ -52,7 +53,7 @@ def execute(): #on_dek, meta, id):
 
 def run_on_dek(model):
 	# Load img
-	img = np.load("on_dek/rdy.npy")
+	img = np.load(PATH + "/on_dek/rdy.npy")
 	print("Image loaded..." + '\n\n' + "Running model...")
 	pidash.dashboard()
 	result = model.predict(img)
