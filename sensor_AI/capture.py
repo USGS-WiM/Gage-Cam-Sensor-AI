@@ -4,7 +4,7 @@ import datetime
 import logging
 import time
 import sys
-import run_lite
+import run_lite as rl
 
 # set up logging
 logging.basicConfig(filename='./camera.log', level=logging.DEBUG, format='%(asctime)s %(levelname)-10s %(processName)s %(name)s %(message)s')
@@ -97,7 +97,7 @@ class Capture:
             logging.info("Starting image upload")
 
             #run AI model here
-            execute()
+            rl.execute()
 
             # upload
             self.emailFile(filename)

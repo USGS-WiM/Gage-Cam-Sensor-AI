@@ -63,4 +63,4 @@ def run_on_dek(model):
 	px, w = get_exposed(result)
 	return px, w
 
-execute()
+#execute()

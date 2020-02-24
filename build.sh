@@ -11,7 +11,6 @@ sudo apt-get install -y python3-pip git
 sudo python3 -m pip install virtualenv
 
 #get software
-git clone https://github.com/USGS-WiM/Gage-Cam-Sensor-AI
 cd Gage-Cam-Sensor-AI
 
 #start virtual env
